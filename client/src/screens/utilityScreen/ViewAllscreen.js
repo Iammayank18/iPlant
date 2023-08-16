@@ -1,0 +1,217 @@
+import React from "react";
+import {
+  ScrollView,
+  Text,
+  View,
+  Dimensions,
+  StatusBar,
+  FlatList,
+  RefreshControl,
+  SafeAreaView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+import Navheader from "../../components/navHeader/Navheader";
+import { Spinner, Stack, VStack, HStack, Center } from "native-base";
+import { useDispatch, useSelector } from "react-redux";
+import SchoolCard from "../../components/postCard/PostCard";
+import { COLORS, FONT } from "../../utils/theme";
+import { MainScreenAction } from "../home/redux/action";
+import { FindSchoolScreenAction } from "../postDetails/redux/action";
+const { width } = Dimensions.get("window");
+const ViewAllscreen = ({ navigation, route }) => {
+  const dispatch = useDispatch();
+
+  let coordinate = useSelector(
+    (state) => state?.utilityReducer?.userGeoAddress
+  );
+
+  const selectUser = useSelector((state) => state?.loginreducer?.userdata);
+  const cityData = useSelector((state) => state.utilityReducer?.slectedCity);
+
+  let homepageschool = useSelector(
+    (state) => state.MainScreenReducer.qyerypageschool
+  );
+  let homepageschoolLoader = useSelector(
+    (state) => state.MainScreenReducer.qyerypageschoolloader
+  );
+
+  const renderItem = React.useMemo(
+    () =>
+      ({ item }) => {
+        const SCHOOL_DATA = item.school;
+        return (
+          <Stack
+            key={item._id}
+            style={{ flex: 1, alignSelf: "stretch", marginVertical: 10 }}
+          >
+            <SchoolCard
+              title={item?.title}
+              city={item?.city}
+              area={item?.area}
+              state={item?.state}
+              getSchoolDetails={() => {
+                getSchools(item?.location, SCHOOL_DATA?.name, item?._id);
+              }}
+              image={item?.feature_image}
+              like={item?.likes}
+              comments={item?.comments}
+              featured={item?.featured}
+              imagewidth={width - 50}
+              story={item?.story}
+              user={item?.user}
+              profile_pic={item?.user?.profile_picture}
+            />
+          </Stack>
+        );
+      },
+    []
+  );
+
+  const onRefresh = () => {
+    console.log({
+      key: route.params.key,
+      city: cityData,
+      lat: coordinate?.latitude,
+      lng: coordinate?.longitude,
+    });
+    dispatch(
+      MainScreenAction.fetchSchoolsByRouteQuery({
+        key: route.params.key,
+        city: cityData,
+        lat: coordinate?.latitude,
+        lng: coordinate?.longitude,
+      })
+    );
+  };
+
+  function getSchools(dest, name, id) {
+    const destination = {
+      latitude: dest?.coordinates[0],
+      longitude: dest?.coordinates[1],
+    };
+
+    navigation.navigate("postDetails", {
+      id: Math.random() * 100,
+      destination: destination,
+    });
+
+    dispatch(
+      FindSchoolScreenAction.FetchSchoolById({
+        location: id,
+        lat: coordinate?.latitude,
+        lng: coordinate?.longitude,
+        user: selectUser?.user?._id,
+      })
+    );
+  }
+
+  if (homepageschoolLoader) {
+    return (
+      <HStack
+        space={3}
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: COLORS.backgoundAndStatusbar,
+        }}
+      >
+        <StatusBar
+          networkActivityIndicatorVisible={true}
+          animated={true}
+          backgroundColor={COLORS.backgoundAndStatusbar}
+          barStyle={"dark-content"}
+          showHideTransition={"fade"}
+          hidden={false}
+        />
+        <Text
+          style={{
+            fontSize: 20,
+          }}
+        >
+          Loading
+        </Text>
+        <Spinner size="lg" color={COLORS.verbBasePrimaryColor} />
+      </HStack>
+    );
+  }
+  return (
+    <SafeAreaView
+      style={{ backgroundColor: COLORS.backgoundAndStatusbar, flex: 1 }}
+    >
+      <StatusBar
+        networkActivityIndicatorVisible={true}
+        animated={true}
+        backgroundColor={COLORS.backgoundAndStatusbar}
+        barStyle={"dark-content"}
+        showHideTransition={"fade"}
+        hidden={false}
+      />
+      <Navheader
+        title={route.params.name}
+        navigation={() => navigation.goBack()}
+        onChangeText={(e) => setSearchQuery(e)}
+      />
+
+      {homepageschool?.length <= 0 && (
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={homepageschoolLoader}
+              onRefresh={onRefresh}
+            />
+          }
+          style={{
+            marginTop: 100,
+          }}
+        >
+          <Center>
+            <Image
+              source={require("../../assets/notfound34.png")}
+              style={{
+                width: 300,
+                height: 300,
+              }}
+            />
+
+            <Text
+              style={{
+                fontSize: 20,
+                color: COLORS.verbGray,
+                fontFamily: FONT.PoppinsMedium,
+              }}
+            >
+              No data found
+            </Text>
+          </Center>
+        </ScrollView>
+      )}
+
+      <Center
+        mb={5}
+        style={{
+          flex: 1,
+        }}
+      >
+        <FlatList
+          refreshing={homepageschoolLoader}
+          refreshControl={
+            <RefreshControl
+              refreshing={homepageschoolLoader}
+              onRefresh={onRefresh}
+            />
+          }
+          onRefresh={onRefresh}
+          showsVerticalScrollIndicator={false}
+          data={homepageschool}
+          renderItem={renderItem}
+          keyExtractor={(item) => item._id}
+          initialNumToRender={10}
+        />
+      </Center>
+    </SafeAreaView>
+  );
+};
+
+export default ViewAllscreen;
