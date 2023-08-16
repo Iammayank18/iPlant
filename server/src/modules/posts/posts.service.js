@@ -21,7 +21,7 @@ async function createPost(req, res) {
         let response = await COMMON_SERVICE.uploadImageToS3(imageBuffer, fileName);
 
         if (response) {
-            const imageUrl = `https://verb-s3-bucket.s3.amazonaws.com/${fileName}`;
+            const imageUrl = `https://${process.env.AWS_BUCKET}.s3.amazonaws.com/${fileName}`;
 
             const data = req.body;
             const customdata = new postModel({
