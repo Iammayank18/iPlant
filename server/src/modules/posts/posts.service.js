@@ -6,11 +6,7 @@ import postModel from "./schema/posts.schema.js";
 import { COMMON_SERVICE } from "../../utils/common.helper.js";
 import mongoose from "mongoose";
 
-// const { ORS } = process.env;
-
-const orsDirections = new Openrouteservice.Directions({ api_key: "5b3ce3597851110001cf6248800a19756ba344c5b2d53b1857cd1258" });
-// const Matrix = new Openrouteservice.Matrix({ api_key: "5b3ce3597851110001cf6248800a19756ba344c5b2d53b1857cd1258" });
-// const Isochrones = new Openrouteservice.Isochrones({ api_key: "5b3ce3597851110001cf6248800a19756ba344c5b2d53b1857cd1258" });
+const orsDirections = new Openrouteservice.Directions({ api_key: process.env.ORS_API_KEY });
 
 async function createPost(req, res) {
     try {
