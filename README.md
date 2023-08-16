@@ -7,6 +7,8 @@ Unfortunately, due to rapid urbanization and deforestation, our natural environm
 There are many ways to get involved with Iplant. You can volunteer at local tree planting events, donate to organizations that support environmental conservation, or simply make small changes in your daily life, such as using eco-friendly products and reducing your carbon footprint.
 In conclusion, the Iplant initiative is a crucial step towards promoting the importance of plants and nature. By working together, we can create a healthier and more sustainable environment for ourselves and future generations. Let's all do our part in protecting our planet and preserving our natural heritage.
 
+## Configuration
+
 Installation and configuration commands:
 
 ```
