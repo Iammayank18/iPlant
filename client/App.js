@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { SafeAreaView } from "react-native";
+import { LogBox, SafeAreaView } from "react-native";
 import { NativeBaseProvider } from "native-base";
 import { InsideStack } from "./src/stackNavigator";
 import { Provider, useDispatch } from "react-redux";
@@ -23,6 +23,7 @@ function App() {
     return null;
   }
 
+  LogBox.ignoreAllLogs();
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Provider store={store}>

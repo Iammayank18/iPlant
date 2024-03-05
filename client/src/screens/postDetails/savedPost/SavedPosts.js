@@ -9,6 +9,7 @@ import {
   ScrollView,
   TextInput,
   Image,
+  SafeAreaView,
 } from "react-native";
 import React, { useEffect, useState, memo } from "react";
 import Navheader from "../../../components/navHeader/Navheader";
@@ -26,8 +27,6 @@ const SavedData = ({ state, descriptors, navigation }) => {
   const renderItem = React.useMemo(
     () =>
       ({ item }) => {
-        const DATA = item.school;
-        console.log(item.location);
         return (
           <Stack
             key={item._id}
@@ -39,7 +38,7 @@ const SavedData = ({ state, descriptors, navigation }) => {
               area={item?.area}
               state={item?.state}
               getSchoolDetails={() => {
-                getSchools(item?.location, item?.title, item?._id);
+                getSchools(item?.location, item?.name, item?.postId);
               }}
               image={item?.feature_image}
               like={item?.likes}
@@ -64,8 +63,9 @@ const SavedData = ({ state, descriptors, navigation }) => {
   const savedSchoolLoader = useSelector(
     (state) => state?.FindSchoolScreenReducer?.savedSchoolLoader
   );
-  const coordinate = useSelector(
-    (state) => state.mainreducer.OriginCoordinates
+
+  let coordinate = useSelector(
+    (state) => state?.utilityReducer?.userGeoAddress
   );
 
   useEffect(() => {
@@ -107,8 +107,6 @@ const SavedData = ({ state, descriptors, navigation }) => {
     return item?.title?.toLowerCase().includes(searchQuery?.toLowerCase());
   });
 
-  console.log(filteredSchools);
-
   if (savedSchoolLoader) {
     return (
       <HStack
@@ -141,7 +139,9 @@ const SavedData = ({ state, descriptors, navigation }) => {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: COLORS.backgoundAndStatusbar }}>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: COLORS.backgoundAndStatusbar }}
+    >
       <StatusBar
         networkActivityIndicatorVisible={true}
         animated={true}
@@ -170,7 +170,7 @@ const SavedData = ({ state, descriptors, navigation }) => {
         </HStack>
       </HStack>
 
-      {filteredSchools.length <= 0 && (
+      {filteredSchools?.length <= 0 && (
         <ScrollView
           refreshControl={<RefreshControl onRefresh={onRefresh} />}
           onRefresh={onRefresh}
@@ -223,7 +223,7 @@ const SavedData = ({ state, descriptors, navigation }) => {
           contentContainerStyle={{ paddingBottom: 50 }}
         />
       </Center>
-    </View>
+    </SafeAreaView>
   );
 };
 

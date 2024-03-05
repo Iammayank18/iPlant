@@ -25,14 +25,14 @@ const MainScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   let homepageschool = useSelector(
-    (state) => state.MainScreenReducer.homepageschool
+    (state) => state?.MainScreenReducer?.homepageschool
   );
   let homepageschoolLoader = useSelector(
-    (state) => state.MainScreenReducer.homepageschoolloader
+    (state) => state?.MainScreenReducer?.homepageschoolloader
   );
-  const cityData = useSelector((state) => state.utilityReducer?.slectedCity);
 
-  const selectUser = useSelector((state) => state?.mainreducer?.Login);
+  const selectUser = useSelector((state) => state?.loginreducer?.userdata);
+
   let coordinate = useSelector(
     (state) => state?.utilityReducer?.userGeoAddress
   );
@@ -40,13 +40,13 @@ const MainScreen = ({ navigation }) => {
   useEffect(() => {
     dispatch(
       MainScreenAction.fetchHomePageSchools({
-        city: cityData,
-        ...(Object.keys(coordinate).length > 0
+        city: coordinate?.city,
+        ...(Object?.keys(coordinate).length > 0
           ? { latitude: coordinate.latitude, longitude: coordinate.longitude }
           : {}),
       })
     );
-  }, [cityData]);
+  }, [coordinate]);
 
   function getSchools(dest, name, id) {
     const destination = {
@@ -58,7 +58,7 @@ const MainScreen = ({ navigation }) => {
       location: id,
       lat: coordinate?.latitude,
       lng: coordinate?.longitude,
-      user: selectUser?.data?.data?._id,
+      user: selectUser?.user?._id,
     });
 
     navigation.navigate("postDetails", {
@@ -71,7 +71,7 @@ const MainScreen = ({ navigation }) => {
         location: id,
         lat: coordinate?.latitude,
         lng: coordinate?.longitude,
-        user: selectUser?.data?.data?._id,
+        user: selectUser?.user?._id,
       })
     );
   }
@@ -79,7 +79,7 @@ const MainScreen = ({ navigation }) => {
   const onRefresh = () => {
     dispatch(
       MainScreenAction.fetchHomePageSchools({
-        city: cityData,
+        city: coordinate?.city,
         ...(coordinate
           ? { latitude: coordinate.latitude, longitude: coordinate.longitude }
           : {}),
@@ -164,7 +164,7 @@ const MainScreen = ({ navigation }) => {
           dispatch(
             MainScreenAction.fetchSchoolsByRouteQuery({
               key: "nearby",
-              city: cityData,
+              city: coordinate?.city,
               lat: coordinate?.latitude,
               lng: coordinate?.longitude,
             })
@@ -178,7 +178,7 @@ const MainScreen = ({ navigation }) => {
           dispatch(
             MainScreenAction.fetchSchoolsByRouteQuery({
               key: "toprated",
-              city: cityData,
+              city: coordinate?.city,
             })
           );
           navigation.navigate("ViewAllScreen", {
@@ -190,7 +190,7 @@ const MainScreen = ({ navigation }) => {
           dispatch(
             MainScreenAction.fetchSchoolsByRouteQuery({
               key: "recent",
-              city: cityData,
+              city: coordinate?.city,
             })
           );
           navigation.navigate("ViewAllScreen", {
@@ -376,8 +376,7 @@ const MainScreen = ({ navigation }) => {
               </HStack>
             </ScrollView>
             {homepageschool.map((item, i) => {
-              const SCHOOL_DATA = item.school;
-
+              console.log(item.postId);
               return (
                 <Stack
                   key={item._id}
@@ -389,7 +388,7 @@ const MainScreen = ({ navigation }) => {
                     area={item?.area}
                     state={item?.state}
                     getSchoolDetails={() => {
-                      getSchools(item?.location, SCHOOL_DATA?.name, item?._id);
+                      getSchools(item?.location, item?.name, item?._id);
                     }}
                     image={item?.feature_image}
                     like={item?.likes}

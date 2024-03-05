@@ -27,7 +27,6 @@ const ViewAllscreen = ({ navigation, route }) => {
   );
 
   const selectUser = useSelector((state) => state?.loginreducer?.userdata);
-  const cityData = useSelector((state) => state.utilityReducer?.slectedCity);
 
   let homepageschool = useSelector(
     (state) => state.MainScreenReducer.qyerypageschool
@@ -69,16 +68,10 @@ const ViewAllscreen = ({ navigation, route }) => {
   );
 
   const onRefresh = () => {
-    console.log({
-      key: route.params.key,
-      city: cityData,
-      lat: coordinate?.latitude,
-      lng: coordinate?.longitude,
-    });
     dispatch(
       MainScreenAction.fetchSchoolsByRouteQuery({
         key: route.params.key,
-        city: cityData,
+        city: coordinate?.city,
         lat: coordinate?.latitude,
         lng: coordinate?.longitude,
       })

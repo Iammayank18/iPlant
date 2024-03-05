@@ -8,18 +8,18 @@ import _ from "lodash";
 export const BasicDetailsBoxs = memo(
   ({ navigation, SCHOOL_DATA, BASIC_DATA, storeCoordinat }) => {
     return (
-      <VStack
-        // shadow={2}
-        bgColor={"white"}
-        borderRadius={10}
-        mb={4}
-        space={4}
-      >
-        <HStack justifyContent={"space-between"} alignItems={"center"}>
+      <VStack bgColor={"white"} borderRadius={10} mb={4} space={4}>
+        <HStack
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          space={1}
+        >
           <Text
             style={{
+              color: COLORS.verbGray,
               fontFamily: FONT.PoppinsMedium,
-              fontSize: 20,
+              width: 320,
+              fontSize: 16,
             }}
           >
             {SCHOOL_DATA?.title}
@@ -35,6 +35,15 @@ export const BasicDetailsBoxs = memo(
         </HStack>
 
         <VStack space={3}>
+          <Text
+            style={{
+              color: COLORS.verbGray,
+              fontFamily: FONT.PoppinsBold,
+              fontSize: 16,
+            }}
+          >
+            Story
+          </Text>
           <Text
             style={{
               color: COLORS.verbGray,

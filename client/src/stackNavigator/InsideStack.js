@@ -37,9 +37,9 @@ const options = {
 function NonAuthStackNavigator() {
   return (
     <NonAuthStack.Navigator initialRouteName="Login" screenOptions={options}>
-      <Stack.Screen name="Login" component={AuthLogin} />
-      <Stack.Screen name="Register" component={AuthRegister} />
-      <Stack.Screen name="Forget" component={ForgetPassword} />
+      <NonAuthStack.Screen name="Login" component={AuthLogin} />
+      <NonAuthStack.Screen name="Register" component={AuthRegister} />
+      <NonAuthStack.Screen name="Forget" component={ForgetPassword} />
     </NonAuthStack.Navigator>
   );
 }
@@ -47,20 +47,20 @@ function NonAuthStackNavigator() {
 function AuthStackNavigator() {
   return (
     <AuthStack.Navigator initialRouteName="BottomTab" screenOptions={options}>
-      <Stack.Screen name="Schools" component={FindSchools} />
-      <Stack.Screen name="postDetails" component={DetailsScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-      <Stack.Screen name="MyProfile" component={MyProfile} />
-      <Stack.Screen name="ChangePassword" component={ChangePassword} />
-      <Stack.Screen name="Setting" component={SettingScreen} />
-      <Stack.Screen name="SelectCity" component={CityScreen} />
-      <Stack.Screen name="SelectBoard" component={BoardScreen} />
-      <Stack.Screen name="SelectFilter" component={FilterScreen} />
-      <Stack.Screen name="ViewAllScreen" component={ViewAllScreen} />
-      <Stack.Screen name="MapView" component={MapViewScreen} />
-      <Stack.Screen name="FeedbackScreen" component={FeedbackScreen} />
-      <Stack.Screen name="AddPost" component={Addpost} />
-      <Stack.Screen name="BottomTab" component={BottomTab2} />
+      <AuthStack.Screen name="Schools" component={FindSchools} />
+      <AuthStack.Screen name="postDetails" component={DetailsScreen} />
+      <AuthStack.Screen name="Profile" component={ProfileScreen} />
+      <AuthStack.Screen name="MyProfile" component={MyProfile} />
+      <AuthStack.Screen name="ChangePassword" component={ChangePassword} />
+      <AuthStack.Screen name="Setting" component={SettingScreen} />
+      <AuthStack.Screen name="SelectCity" component={CityScreen} />
+      <AuthStack.Screen name="SelectBoard" component={BoardScreen} />
+      <AuthStack.Screen name="SelectFilter" component={FilterScreen} />
+      <AuthStack.Screen name="ViewAllScreen" component={ViewAllScreen} />
+      <AuthStack.Screen name="MapView" component={MapViewScreen} />
+      <AuthStack.Screen name="FeedbackScreen" component={FeedbackScreen} />
+      <AuthStack.Screen name="AddPost" component={Addpost} />
+      <AuthStack.Screen name="BottomTab" component={BottomTab2} />
     </AuthStack.Navigator>
   );
 }

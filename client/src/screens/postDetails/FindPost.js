@@ -38,7 +38,7 @@ const FindSchools = ({ navigation }) => {
   const debouncedSearchTerm = useDebounce(searchQuery, 1000);
 
   const inputRef = useRef(null);
-  const cityData = useSelector((state) => state.utilityReducer?.slectedCity);
+
   const selectUser = useSelector((state) => state?.loginreducer?.userdata);
   let coordinate = useSelector(
     (state) => state?.utilityReducer?.userGeoAddress

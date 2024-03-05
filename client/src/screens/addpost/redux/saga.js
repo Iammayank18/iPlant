@@ -5,10 +5,11 @@ import Apis from "../../../api";
 const fetchAddPostRed = function* fetchAddPostRed(action) {
   try {
     const payload = action.payload;
+
     const { data } = yield call(Apis.AddPost, payload);
     yield put(postAction.setAddPost(data || []));
   } catch (err) {
-    console.log(err.response);
+    console.log(err);
     yield put(
       postAction.setAddPost({
         ...err.response.data,

@@ -90,6 +90,7 @@ const AuthRegister = ({ navigation }) => {
       });
       dispatch(LoginActions.setRegisterUser(null));
     } else if (RegisterRes?.msg === "user registered") {
+      dispatch(LoginActions.setRegisterUser(null));
       navigation.navigate("Login");
     }
   }, [dispatch, RegisterLoader]);

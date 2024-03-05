@@ -1,5 +1,6 @@
-// export const BASE_URL = "http://35.78.203.255:5001/";
-export const BASE_URL = "http://localhost:5001/";
+export const BASE_URL =
+  "https://8050-2405-201-a435-3030-2cc7-c498-e136-e212.ngrok-free.app/";
+// export const BASE_URL = "http://localhost:5001/";
 
 // export const BASE_URL = "";
 // export const GOOGLE_MAPS_APIKEY = "AIzaSyCnH_rrWCOm5v4hvFgUSsz_hUpTvwdjcBI";

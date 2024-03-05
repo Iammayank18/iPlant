@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  Platform,
 } from "react-native";
 import React, { memo, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -20,10 +21,11 @@ const Header = ({
   viewAllNavigation,
 }) => {
   const navigation = useNavigation();
-  const cityData = useSelector((state) => state.utilityReducer.slectedCity);
+
   const geoAddress = useSelector(
     (state) => state.utilityReducer.userGeoAddress
   );
+  const cityData = useSelector((state) => state?.utilityReducer?.slectedCity);
 
   return (
     <>
@@ -35,25 +37,47 @@ const Header = ({
         justifyContent={"space-between"}
         alignItems={"center"}
       >
-        <HStack>
-          <Text
-            style={{
-              color: COLORS.gray,
-              fontSize: 30,
-              fontFamily: FONT.PoppinsBold,
-            }}
-          >
-            iPlant
-          </Text>
-          <Image
-            source={require("../../assets/leaf.png")}
-            alt="Alternate Text"
-            style={{
-              width: 25,
-              height: 25,
-            }}
-          />
-        </HStack>
+        <VStack>
+          <HStack>
+            <Text
+              style={{
+                color: COLORS.gray,
+                fontSize: 30,
+                fontFamily: FONT.PoppinsBold,
+              }}
+            >
+              iPlant
+            </Text>
+            <Image
+              source={require("../../assets/leaf.png")}
+              alt="Alternate Text"
+              style={{
+                width: 25,
+                height: 25,
+              }}
+            />
+          </HStack>
+          <TouchableOpacity onPress={() => navigation.navigate("SelectCity")}>
+            <HStack
+              alignItems={"center"}
+              space={1}
+              style={{
+                marginTop: Platform.OS === "ios" ? -5 : -10,
+              }}
+            >
+              <AntDesign name="down" size={16} color={COLORS.gray} />
+              <Text
+                style={{
+                  color: COLORS.gray,
+                  fontSize: 13,
+                  fontFamily: FONT.PoppinsMedium,
+                }}
+              >
+                {geoAddress?.city ?? "Select city"}
+              </Text>
+            </HStack>
+          </TouchableOpacity>
+        </VStack>
         <TouchableOpacity onPressIn={() => navigation.navigate("MapView")}>
           <AntDesign
             name="earth"

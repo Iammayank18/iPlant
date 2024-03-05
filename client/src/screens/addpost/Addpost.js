@@ -177,7 +177,7 @@ const Addpost = ({ navigation }) => {
       bottomDrawerRef.current.close(0);
     }
   };
-
+  console.log(userGeoadd);
   const addpost = () => {
     const formData = new FormData();
     formData.append("image", {
@@ -187,9 +187,9 @@ const Addpost = ({ navigation }) => {
     });
     formData.append("user", selectUser.user?._id);
     formData.append("city", userGeoadd.city);
-    formData.append("state", userGeoadd.state);
+    formData.append("state", userGeoadd.state || userGeoadd.region);
     formData.append("country", userGeoadd.country);
-    formData.append("postcode", userGeoadd.postcode);
+    formData.append("postcode", userGeoadd.postalCode);
     formData.append("title", feedBackData.subject);
     formData.append("story", feedBackData.message);
     formData.append(
@@ -201,6 +201,7 @@ const Addpost = ({ navigation }) => {
   };
 
   useEffect(() => {
+    // dispatch(postAction.setAddPost(null));
     if (bottomDrawerOpen) {
       if (bottomDrawerRef.current) {
         bottomDrawerRef.current.open(150);
@@ -333,7 +334,11 @@ const Addpost = ({ navigation }) => {
         title={"Add"}
         onPress={addpost}
         disabled={
-          addpostLoader || feedBackData?.message?.split(" ").length > 50
+          addpostLoader ||
+          feedBackData?.message?.split(" ").length > 50 ||
+          feedBackData?.subject?.length <= 0 ||
+          feedBackData?.message?.length <= 0 ||
+          !image
         }
         loader={addpostLoader}
         style={{
@@ -342,11 +347,16 @@ const Addpost = ({ navigation }) => {
           marginTop: 10,
           borderRadius: 10,
           backgroundColor:
-            !feedBackData?.message?.split(" ").length > 50 || addpostLoader
+            addpostLoader ||
+            feedBackData?.message?.split(" ").length > 50 ||
+            feedBackData?.subject?.length <= 0 ||
+            feedBackData?.message?.length <= 0 ||
+            !image
               ? COLORS.verbGray2
               : COLORS.verbBasePrimaryColor,
           height: 50,
           alignSelf: "center",
+          marginBottom: Platform.OS === "android" ? 10 : 0,
         }}
         loaderColor={addpostLoader ? "black" : "white"}
       />

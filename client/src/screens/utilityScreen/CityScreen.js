@@ -5,7 +5,6 @@ import {
   StyleSheet,
   StatusBar,
   TouchableOpacity,
-  Platform,
   Dimensions,
   ActivityIndicator,
   TextInput,
@@ -59,31 +58,8 @@ const CityScreen = ({ navigation }) => {
     item?.name.toLowerCase().includes(data?.toLowerCase())
   );
   const dispatch = useDispatch();
-  const cityData = useSelector((state) => state.utilityReducer);
   const userGeoadd = useSelector(
     (state) => state.utilityReducer.userGeoAddress
-  );
-
-  const renderItem = React.useMemo(
-    () =>
-      ({ item }) => {
-        const backgroundColor = item.id === selectedId ? "white" : "white";
-        const color = item.id === selectedId ? "black" : "black";
-        const selecItem = (item) => {
-          setSelectedId(item.id);
-          dispatch(UtilityAction.selectUserCity(item.name));
-          navigation.goBack();
-        };
-        return (
-          <Item
-            item={item}
-            onPress={() => selecItem(item)}
-            backgroundColor={backgroundColor}
-            textColor={color}
-          />
-        );
-      },
-    [selectedId]
   );
 
   const detectLocation = async () => {
@@ -116,7 +92,7 @@ const CityScreen = ({ navigation }) => {
           setPermissionGranted(true);
           SetLocMsg("Location detected");
           dispatch(UtilityAction.storeUserGeoAddress(userGeoAddress));
-          dispatch(UtilityAction.selectUserCity(CITY));
+
           const jsonValue = JSON.stringify(userGeoAddress);
           await AsyncStorage.setItem("@coordinates", jsonValue);
           setTimeout(() => {
@@ -136,6 +112,33 @@ const CityScreen = ({ navigation }) => {
       }, 1200);
     }
   };
+
+  const renderItem = React.useMemo(
+    () =>
+      ({ item }) => {
+        const backgroundColor = item.id === selectedId ? "white" : "white";
+        const color = item.id === selectedId ? "black" : "black";
+        const selecItem = async (item) => {
+          setSelectedId(item.id);
+          dispatch(
+            UtilityAction.storeUserGeoAddress({
+              ...userGeoadd,
+              city: item.name,
+            })
+          );
+          navigation.goBack();
+        };
+        return (
+          <Item
+            item={item}
+            onPress={() => selecItem(item)}
+            backgroundColor={backgroundColor}
+            textColor={color}
+          />
+        );
+      },
+    [selectedId]
+  );
 
   return (
     <SafeAreaView

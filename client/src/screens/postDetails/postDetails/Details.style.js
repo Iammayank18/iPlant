@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: -10,
     marginBottom: 20,
-    marginTop: -4,
+    marginTop: 10,
   },
   inHead: {
     flexDirection: "row",

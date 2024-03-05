@@ -159,8 +159,8 @@ const SchoolDetailsScreen = ({ route, navigation }) => {
         <ScrollView horizontal={true}>
           <AspectRatio
             height={{
-              base: width / 1.3,
-              md: width,
+              base: height,
+              md: height,
             }}
             width={{
               base: width,
@@ -247,78 +247,6 @@ const SchoolDetailsScreen = ({ route, navigation }) => {
           <FeedbackBox BASIC_DATA={BASIC_DATA} />
         </View>
       </ScrollView>
-
-      {/* <Center
-        style={{
-          ...(Platform.OS === "android"
-            ? {
-                alignSelf: "center",
-                position: "absolute",
-                bottom: 20,
-              }
-            : { position: "absolute", bottom: 10, alignSelf: "center" }),
-        }}
-      >
-        <HStack space={2}>
-          <CommonButton
-            onPress={addToFav}
-            icon={
-              addSavedSchoolLoader ? (
-                <Spinner />
-              ) : (
-                <FontAwesome
-                  name={isfav ? "heart" : "heart-o"}
-                  size={24}
-                  color={isfav ? "white" : "white"}
-                />
-              )
-            }
-            style={{
-              width: width / 2.5,
-              marginTop: 10,
-              borderRadius: 10,
-              backgroundColor: COLORS.verbBasePrimaryColor,
-              height: 50,
-            }}
-            title={isfav ? "Liked" : "Like"}
-          />
-          <CommonButton
-            onPress={sendEnquiryToSchool}
-            title={isEnquired ? "Saved" : "Save"}
-            icon={
-              isEnquired && (
-                <Feather name="check-circle" size={15} color="black" />
-              )
-            }
-            style={{
-              width: width / 2.5,
-              marginTop: 10,
-              borderRadius: 10,
-              height: 50,
-              backgroundColor: schoolsEnquiryLoader
-                ? COLORS.verbBaseLighterColor
-                : isEnquired
-                ? COLORS.verbBaseLightColor
-                : COLORS.verbBasePrimaryColor,
-              borderWidth: 1,
-              borderColor: isEnquired
-                ? COLORS.verbBasePrimaryColor
-                : COLORS.verbBasePrimaryColor,
-              gap: 8,
-            }}
-            // loaderColor={"white"}
-            textStyle={{
-              color: schoolsEnquiryLoader
-                ? "gray"
-                : isEnquired
-                ? "white"
-                : "white",
-            }}
-            loader={schoolsEnquiryLoader}
-            disabled={isEnquired}
-          />
-        </HStack>
-      </Center> */}
     </View>
   );
 };

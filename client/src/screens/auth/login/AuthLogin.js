@@ -14,7 +14,7 @@ import {
 import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import { Formik } from "formik";
-import { Stack, HStack } from "native-base";
+import { Stack, HStack, Center } from "native-base";
 
 import EmailIcon from "../../../assets/iconEmail.png";
 import usePassIcon from "../../../assets/user-pass.png";
@@ -230,28 +230,26 @@ const AuthLogin = ({ navigation }) => {
                   }}
                   loaderColor={logres.loading ? "black" : "white"}
                 />
-                <View style={{ paddingBottom: 30 }}>
-                  <View style={{ alignItems: "center" }}>
-                    <Pressable
-                      style={{ marginTop: 5 }}
-                      onPress={() => navigation.navigate("Register")}
+                <Center style={{ paddingBottom: 30 }}>
+                  <TouchableOpacity
+                    style={{ marginTop: 5 }}
+                    onPress={() => navigation.navigate("Register")}
+                  >
+                    <Text
+                      style={{
+                        fontFamily: "DMMedium",
+                        color: "#BABABA",
+                      }}
                     >
+                      Don't have an account?{" "}
                       <Text
-                        style={{
-                          fontFamily: "DMMedium",
-                          color: "#BABABA",
-                        }}
+                        style={{ color: "#0E2528", fontFamily: "DMMedium" }}
                       >
-                        Don't have an account?{" "}
-                        <Text
-                          style={{ color: "#0E2528", fontFamily: "DMMedium" }}
-                        >
-                          Signup
-                        </Text>
+                        Signup
                       </Text>
-                    </Pressable>
-                  </View>
-                </View>
+                    </Text>
+                  </TouchableOpacity>
+                </Center>
               </View>
             )}
           </Formik>
