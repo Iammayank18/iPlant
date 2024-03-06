@@ -9,6 +9,7 @@ import mongoose from "mongoose";
 const orsDirections = new Openrouteservice.Directions({ api_key: process.env.ORS_API_KEY });
 
 async function createPost(req, res) {
+    console.log(req.body);
     try {
         const coord = req.body.coordinates;
         const data = req.body;
@@ -28,7 +29,7 @@ async function createPost(req, res) {
                 user: data.user,
                 city: data.city,
                 country: data.country,
-                postcode: data.postcode,
+                postcode: data.postalCode,
                 feature_image: imageUrl,
                 title: data.title,
                 story: data.story,
@@ -185,7 +186,7 @@ async function getOnePostById(data) {
         const response = await PostLocationModel.aggregate(pipeline);
 
         const ns = response[0];
-        console.log(ns);
+        console.log("here====>", ns);
         const {
             location: { coordinates },
         } = ns;
@@ -480,6 +481,7 @@ async function GetPostForHomePage(query) {
             },
             {
                 $project: {
+                    postId: "$_id",
                     likes: {
                         $size: "$favs",
                     },

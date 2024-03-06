@@ -501,6 +501,11 @@ async function getFavourites(req, res) {
         // const fav = await FavoriteModel.find({ user: uid }).populate(["school", "user", "location"]).lean(true);
         const fav = await FavoriteModel.aggregate([
             {
+                $match: {
+                    user: mongoose.Types.ObjectId(uid),
+                },
+            },
+            {
                 $sort: { distance: 1 },
             },
             {
@@ -545,8 +550,8 @@ async function getFavourites(req, res) {
             },
             {
                 $lookup: {
-                    from: "reviews",
-                    localField: "_id",
+                    from: "favouriteposts",
+                    localField: "location",
                     foreignField: "location",
                     as: "favs",
                 },
@@ -554,13 +559,14 @@ async function getFavourites(req, res) {
             {
                 $lookup: {
                     from: "reviews",
-                    localField: "_id",
+                    localField: "location",
                     foreignField: "location",
                     as: "reviewsData",
                 },
             },
             {
                 $project: {
+                    postId: "$locationData._id",
                     likes: {
                         $size: "$favs",
                     },
