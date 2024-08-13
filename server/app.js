@@ -34,3 +34,5 @@ app.use(POST_REVIEW_ROUTE, postReviewRouter);
 app.listen(port, () => {
   console.log(`connection is setup at:  ${port}`);
 });
+
+export default app;
