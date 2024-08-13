@@ -1,0 +1,45 @@
+{
+    "name": "iPlant",
+    "slug": "iplant",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/playstore.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/iplantSpash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.iammayank20.iplant",
+      "config": {
+        "googleMapsApiKey": "AIzaSyDaQptWy1axlsnLhfrMoMYzuBmdL65tpRE"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/appstore.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.iammayank20.iplant",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDaQptWy1axlsnLhfrMoMYzuBmdL65tpRE"
+        }
+      }
+    },
+    "web": {
+      "favicon": "./assets/playstore.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a7515bfa-6cea-4740-9d37-9d47195b7fad"
+      }
+    },
+    "expo": {
+      "userInterfaceStyle": "automatic"
+    }
+  
+}

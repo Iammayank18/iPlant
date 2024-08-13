@@ -1,0 +1,113 @@
+import { StyleSheet } from "react-native";
+const style = StyleSheet.create({
+  container: {
+    backgroundColor: "white",
+    flex: 1,
+  },
+  logoContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 90,
+    marginBottom: 20,
+  },
+  loginImage: {
+    width: 100,
+    height: 100,
+    marginTop: 50,
+  },
+  textInput: {
+    borderRadius: 16,
+    // padding: 12,
+    // backgroundColor: "#eaeaea",
+    marginBottom: 10,
+    // borderWidth: 0,
+    borderColor: "#CDCDCD",
+
+    borderWidth: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    padding: 10,
+    gap: 10,
+    paddingHorizontal: 15,
+  },
+  iconSize: {
+    width: 20,
+    height: 22,
+  },
+  textInputPassword: {
+    borderRadius: 16,
+    // padding: 12,
+    // backgroundColor: "#eaeaea",
+    marginBottom: 10,
+    // borderWidth: 0,
+    borderColor: "#CDCDCD",
+
+    borderWidth: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    padding: 10,
+    gap: 10,
+    paddingHorizontal: 15,
+  },
+  textInputContainer: {
+    padding: 20,
+    flexDirection: "column",
+    justifyContent: "space-between",
+    flexGrow: 1,
+  },
+  button: {
+    backgroundColor: "#0D4C92",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: 48,
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 14,
+    fontFamily: "DMMedium",
+  },
+  googleLog: {
+    flexDirection: "row",
+    backgroundColor: "#e2e2e2",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: 42,
+    borderRadius: 8,
+    marginTop: 10,
+    padding: 10,
+    paddingHorizontal: 35,
+  },
+  googleText: {
+    color: "grey",
+    fontWeight: "bold",
+    alignItems: "center",
+  },
+  facebookLog: {
+    flexDirection: "row",
+    backgroundColor: "#e2e2e2",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: 42,
+    borderRadius: 8,
+    marginTop: 10,
+    padding: 10,
+    paddingHorizontal: 35,
+  },
+  facebooktext: {
+    color: "grey",
+    fontWeight: "bold",
+    alignItems: "center",
+  },
+  errors: {
+    color: "#E0144C",
+    marginTop: -6,
+    marginBottom: 10,
+    fontWeight: "400",
+    marginLeft: 10,
+  },
+});
+
+export default style;

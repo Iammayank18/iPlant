@@ -1,0 +1,30 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": ["airbnb-base"],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
+        // enable additional rules
+        "indent": "off",
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["error", "double"],
+        "semi": ["error", "always"],
+
+        // override configuration set by extending "eslint:recommended"
+        "no-empty": "warn",
+        "no-cond-assign": ["error", "always"],
+
+        // disable rules from base configurations
+        "for-direction": "off",
+        "no-undef": "error",
+        "object-curly-newline": ["error", { "consistent": true }],
+        "import/extensions": "off",
+        "max-len": "off",
+        "no-underscore-dangle": "off"
+    }
+}
