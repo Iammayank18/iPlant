@@ -31,6 +31,10 @@ app.use(USER_ROUTE_NAME, userRouter);
 app.use(POST_ROUTE_NAME, postRouter);
 app.use(POST_REVIEW_ROUTE, postReviewRouter);
 
+app.get("/", (req, res) => {
+  res.send("hello world");
+});
+
 app.listen(port, () => {
   console.log(`connection is setup at:  ${port}`);
 });
