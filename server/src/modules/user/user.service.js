@@ -423,6 +423,8 @@ async function getAllUsers() {
       data: user,
     };
   } catch (e) {
+    console.log(e);
+
     return {
       status: false,
       message: "something went wrong",

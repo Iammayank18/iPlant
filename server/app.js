@@ -4,6 +4,7 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import "./src/db/conn.js";
+import morgan from "morgan";
 import {
   POST_ROUTE_NAME,
   POST_REVIEW_ROUTE,
@@ -26,6 +27,7 @@ const pubDir = path.join(__dirname, "./src/images");
 app.use(express.static(pubDir));
 
 const port = process.env.PORT || 5001;
+app.use(morgan("tiny"));
 app.use(express.json());
 app.use(USER_ROUTE_NAME, userRouter);
 app.use(POST_ROUTE_NAME, postRouter);
