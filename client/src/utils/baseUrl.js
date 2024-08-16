@@ -1,5 +1,4 @@
-export const BASE_URL =
-  "https://034d-2406-b400-b4-dd87-8121-6363-300f-b07a.ngrok-free.app/";
+export const BASE_URL = "https://iplant.vercel.app/";
 // export const BASE_URL = "http://localhost:5001/";
 
 // export const BASE_URL = "";
