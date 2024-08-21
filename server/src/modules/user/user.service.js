@@ -78,30 +78,15 @@ async function verifyOtpEmail(req, res) {
 async function registerUser(req, res) {
   // register with facebook & google
 
-  const { email, username, password, confirmpassword } = req.body;
+  const { email } = req.body;
 
   try {
     const checkUSer = await User.findOne({ email });
-    const existingUsername = await User.findOne({ username });
     if (checkUSer) {
       return COMMON_SERVICE.apiResponse(res, "user already exist", false, 500);
     }
-    if (existingUsername) {
-      return COMMON_SERVICE.apiResponse(
-        res,
-        "Username is already taken.",
-        false,
-        500,
-      );
-    }
 
-    const updateData = {
-      username,
-      email,
-      password,
-    };
-
-    const update = await new User(updateData);
+    const update = await new User(req.body);
     const letStore = update.save();
     if (letStore) {
       const mailTransporter = nodemailer.createTransport({
@@ -114,8 +99,8 @@ async function registerUser(req, res) {
       const mailDetails = {
         from: "basantkumar2022@gmail.com",
         to: req.body.email,
-        subject: "Welcom to Alzebra",
-        text: `Welcome to alzebra ${req.body.name}!`,
+        subject: "Welcom to iPlant",
+        text: `Welcome to iPlant ${req.body.name}!`,
       };
 
       mailTransporter.sendMail(mailDetails, (err, data) => {
@@ -202,7 +187,7 @@ async function forgetPasswordOtp(req, res) {
         from: "basantkumar2022@gmail.com",
         to: Userdata.email,
         subject: "Reset Password",
-        text: `Otp for alzebra is ${otp}`,
+        text: `Otp for iPlant is ${otp}`,
       };
 
       mailTransporter.sendMail(mailDetails, (err, data) => {
@@ -461,11 +446,8 @@ async function uploadProfilePhoto(req, res) {
       );
     }
     const imageBuffer = Buffer.from(req.file.buffer, "base64");
-    const response = await COMMON_SERVICE.uploadImageToS3(
-      imageBuffer,
-      fileName,
-    );
-    const imageUrl = `https://verb-s3-bucket.s3.amazonaws.com/${fileName}`;
+    await COMMON_SERVICE.uploadImageToS3(imageBuffer, fileName);
+    const imageUrl = `https://iplant-bucket.s3.amazonaws.com/${fileName}`;
     const updateUserProfilePhoto = await User.findOneAndUpdate(
       { _id: req.body._id },
       { profile_picture: imageUrl },

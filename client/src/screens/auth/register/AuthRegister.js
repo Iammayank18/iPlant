@@ -33,16 +33,16 @@ let LoginSchema = yup.object().shape({
     .required()
     .matches(
       /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-      "Password must contain at least aone uppercase, one number and one special case character"
+      "Password must contain at least aone uppercase, one number and one special case character",
     ),
-  username: yup.string().required(),
+  name: yup.string().required(),
   confirmpassword: yup
     .string()
     .min(6)
     .required()
     .matches(
       /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-      "Password must contain at least aone uppercase, one number and one special case character"
+      "Password must contain at least aone uppercase, one number and one special case character",
     ),
 });
 
@@ -53,7 +53,7 @@ const AuthRegister = ({ navigation }) => {
 
   const RegisterRes = useSelector((data) => data?.loginreducer.registerReq);
   const RegisterLoader = useSelector(
-    (data) => data?.loginreducer?.registerLoader
+    (data) => data?.loginreducer?.registerLoader,
   );
 
   useEffect(() => {
@@ -63,24 +63,22 @@ const AuthRegister = ({ navigation }) => {
         render: () => {
           return (
             <HStack
-              bg="amber.500"
-              px="2"
-              py="1"
+              bg='amber.500'
+              px='2'
+              py='1'
               mr={2}
-              rounded="sm"
+              rounded='sm'
               p={2}
               space={1}
               alignItems={"center"}
               height={"10"}
-              justifyContent={"center"}
-            >
-              <Feather name="info" size={20} color="white" />
+              justifyContent={"center"}>
+              <Feather name='info' size={20} color='white' />
               <Text
                 style={{
                   color: "white",
                   fontFamily: FONT.medium,
-                }}
-              >
+                }}>
                 {RegisterRes?.msg}
               </Text>
             </HStack>
@@ -105,13 +103,12 @@ const AuthRegister = ({ navigation }) => {
                 color: COLORS.gray,
                 fontSize: 45,
                 fontFamily: FONT.PoppinsBold,
-              }}
-            >
+              }}>
               iPlant
             </Text>
             <Image
               source={require("../../../assets/leaf.png")}
-              alt="Alternate Text"
+              alt='Alternate Text'
               style={{
                 width: 35,
                 height: 35,
@@ -125,15 +122,14 @@ const AuthRegister = ({ navigation }) => {
               color: COLORS.verbGray,
               marginTop: 10,
               textAlign: "center",
-            }}
-          >
+            }}>
             Create a accout.
           </Text>
         </Stack>
 
         <Formik
           initialValues={{
-            username: "",
+            name: "",
             email: "",
             password: "",
             confirmpassword: "",
@@ -142,8 +138,7 @@ const AuthRegister = ({ navigation }) => {
             dispatch(LoginActions.fetchRegisterUser(values));
           }}
           validationSchema={LoginSchema}
-          validateOnMount={true}
-        >
+          validateOnMount={true}>
           {({
             handleChange,
             handleBlur,
@@ -157,38 +152,38 @@ const AuthRegister = ({ navigation }) => {
               <KeyboardAvoidingView>
                 <Stack>
                   <CommonInput
-                    placeholder="Username"
-                    inputLable={"Username"}
-                    onChangeText={handleChange("username")}
-                    onBlur={handleBlur("username")}
-                    value={values.username}
+                    placeholder='Full name'
+                    inputLable={"Full name"}
+                    onChangeText={handleChange("name")}
+                    onBlur={handleBlur("name")}
+                    value={values.name}
                     placeholderColor={COLORS.placeholderColor}
-                    autoCapitalize="words"
+                    autoCapitalize='words'
                     autoCorrect={false}
                     leftIcon={
                       <Image
                         source={usePassIcon}
                         style={style.iconSize}
-                        resizeMode="stretch"
+                        resizeMode='stretch'
                       />
                     }
                   />
-                  {errors.username && touched.username && (
-                    <Text style={style.errors}>{errors.username}</Text>
+                  {errors.name && touched.name && (
+                    <Text style={style.errors}>{errors.name}</Text>
                   )}
                 </Stack>
                 <Stack>
                   <CommonInput
-                    placeholder="Email"
+                    placeholder='Email'
                     inputLable={"Email"}
-                    textContentType="emailAddress"
+                    textContentType='emailAddress'
                     onChangeText={handleChange("email")}
                     onBlur={handleBlur("email")}
                     value={values.email}
                     placeholderColor={COLORS.placeholderColor}
-                    autoCapitalize="words"
+                    autoCapitalize='words'
                     autoCorrect={false}
-                    leftIcon={<Fontisto name="email" size={22} color="black" />}
+                    leftIcon={<Fontisto name='email' size={22} color='black' />}
                   />
                   {errors.email && touched.email && (
                     <Text style={style.errors}>{errors.email}</Text>
@@ -205,7 +200,7 @@ const AuthRegister = ({ navigation }) => {
                       <Image
                         source={usePassIcon}
                         style={style.iconSize}
-                        resizeMode="stretch"
+                        resizeMode='stretch'
                       />
                     }
                     rightIcon={
@@ -213,8 +208,7 @@ const AuthRegister = ({ navigation }) => {
                         <TouchableOpacity
                           onPress={() => {
                             setShow(!show);
-                          }}
-                        >
+                          }}>
                           {!show ? (
                             <Image
                               source={usePassEye}
@@ -222,7 +216,7 @@ const AuthRegister = ({ navigation }) => {
                                 width: 20,
                                 height: 20,
                               }}
-                              resizeMode="contain"
+                              resizeMode='contain'
                             />
                           ) : (
                             <Image
@@ -231,7 +225,7 @@ const AuthRegister = ({ navigation }) => {
                                 width: 20,
                                 height: 20,
                               }}
-                              resizeMode="contain"
+                              resizeMode='contain'
                             />
                           )}
                         </TouchableOpacity>
@@ -256,7 +250,7 @@ const AuthRegister = ({ navigation }) => {
                       <Image
                         source={usePassIcon}
                         style={style.iconSize}
-                        resizeMode="stretch"
+                        resizeMode='stretch'
                       />
                     }
                     rightIcon={
@@ -264,8 +258,7 @@ const AuthRegister = ({ navigation }) => {
                         <TouchableOpacity
                           onPress={() => {
                             setShow(!show);
-                          }}
-                        >
+                          }}>
                           {!show ? (
                             <Image
                               source={usePassEye}
@@ -273,7 +266,7 @@ const AuthRegister = ({ navigation }) => {
                                 width: 20,
                                 height: 20,
                               }}
-                              resizeMode="contain"
+                              resizeMode='contain'
                             />
                           ) : (
                             <Image
@@ -282,7 +275,7 @@ const AuthRegister = ({ navigation }) => {
                                 width: 20,
                                 height: 20,
                               }}
-                              resizeMode="contain"
+                              resizeMode='contain'
                             />
                           )}
                         </TouchableOpacity>
@@ -322,14 +315,12 @@ const AuthRegister = ({ navigation }) => {
                 <View style={{ alignItems: "center" }}>
                   <Pressable
                     style={{ marginTop: 5 }}
-                    onPress={() => navigation.navigate("Login")}
-                  >
+                    onPress={() => navigation.navigate("Login")}>
                     <Text
                       style={{
                         fontFamily: "DMMedium",
                         color: "#BABABA",
-                      }}
-                    >
+                      }}>
                       Already have an account?{" "}
                       <Text style={{ color: "#0D4C92", fontWeight: "bold" }}>
                         Login

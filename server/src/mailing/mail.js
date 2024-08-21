@@ -13,7 +13,7 @@ const Sendmail = async (mailto, otp) => {
     });
 
     const maildata = `
-  <p>WELCOME TO Alzebra</p>
+  <p>WELCOME TO iPlant</p>
     <h3>Your otp details</h3>
     <ul>
         
@@ -22,7 +22,7 @@ const Sendmail = async (mailto, otp) => {
     </ul>
 `;
     await transporter.sendMail({
-      from: "Alzebra test@exponusmedia.com", // sender address
+      from: "iPlant test@exponusmedia.com", // sender address
       to: mailto, // list of receivers
       subject: "Your otp Details", // Subject line
       text: "Hello world?", // plain text body

@@ -6,6 +6,7 @@ const login = function* login(action) {
   try {
     const payload = action.payload;
     const { data } = yield call(Apis.LoginAPi, payload);
+
     if (data.status === false) {
       return yield put(LoginActions.loginReqFailed(data));
     }
@@ -18,6 +19,7 @@ const login = function* login(action) {
       }),
     );
   } catch (error) {
+    console.log(error.response);
     return yield put(LoginActions.loginReqFailed(error));
   }
 };
