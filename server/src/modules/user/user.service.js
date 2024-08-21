@@ -134,7 +134,6 @@ async function registerUser(req, res) {
     }
     return COMMON_SERVICE.apiResponse(res, "registration failed", false, 500);
   } catch (e) {
-    console.log(e);
     return COMMON_SERVICE.apiResponse(res, "something went wrong", false, 500);
   }
 }
@@ -297,7 +296,6 @@ async function getOneUserByEmail(email) {
     };
   } catch (e) {
     // return COMMON_SERVICE.apiResponse(res, "something went wrong", false, 500);
-    console.log(e.response);
     return {
       status: false,
       message: "something went wrong",
@@ -378,7 +376,6 @@ async function getOneUserByUserid(req, res) {
     }
     return COMMON_SERVICE.apiResponse(res, "fetched", true, 200, response[0]);
   } catch (e) {
-    console.log(e);
     return COMMON_SERVICE.apiResponse(res, "something went wrong", false, 500);
   }
 }
@@ -423,8 +420,6 @@ async function getAllUsers() {
       data: user,
     };
   } catch (e) {
-    console.log(e);
-
     return {
       status: false,
       message: "something went wrong",
@@ -437,7 +432,7 @@ async function updateUserPersonalData(req, res) {
   const updatePersonalData = await User.findOneAndUpdate({ _id }, req.body, {
     new: true,
   });
-  console.log(updatePersonalData);
+
   try {
     if (updatePersonalData) {
       return COMMON_SERVICE.apiResponse(
@@ -699,13 +694,12 @@ async function getFavourites(req, res) {
         },
       },
     ]);
-    console.log(fav);
+
     if (fav.length <= 0) {
       return COMMON_SERVICE.apiResponse(res, "favourite not found", false, 404);
     }
     return COMMON_SERVICE.apiResponse(res, "found ", true, 200, fav);
   } catch (e) {
-    console.log(e);
     return COMMON_SERVICE.apiResponse(res, "something went wrong", false, 500);
   }
 }

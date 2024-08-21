@@ -43,7 +43,7 @@ const ProfileScreen = ({ navigation }) => {
   useEffect(() => {
     dispatch(ProfileAction.fetchUserProfileData({ id: selectUser?.user?._id }));
   }, []);
-  console.log(profileData?.data?.profile_picture);
+
   useEffect(() => {
     setImage(profileData?.data?.profile_picture);
     if (profilePhotoRes?.statusCode === 500) {
@@ -198,9 +198,6 @@ const ProfileScreen = ({ navigation }) => {
                   }}
                   alt='Alternate Text'
                   style={style.profilePic}
-                  onLoad={(e) => {
-                    console.log(e);
-                  }}
                 />
               )}
             </TouchableOpacity>

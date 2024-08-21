@@ -173,7 +173,7 @@ const Addpost = ({ navigation }) => {
       bottomDrawerRef.current.close(0);
     }
   };
-  console.log(userGeoadd);
+
   const addpost = () => {
     const formData = new FormData();
     formData.append("image", {
@@ -206,7 +206,7 @@ const Addpost = ({ navigation }) => {
       bottomDrawerRef.current.close(0);
     }
   }, [bottomDrawerOpen]);
-  console.log(feedBackData);
+
   return (
     <SafeAreaView
       style={{

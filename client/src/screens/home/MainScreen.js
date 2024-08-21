@@ -321,7 +321,6 @@ const MainScreen = ({ navigation }) => {
               </HStack>
             </ScrollView>
             {homepagepost.map((item, i) => {
-              console.log(item.postId);
               return (
                 <Stack
                   key={item._id}

@@ -101,7 +101,6 @@ const CityScreen = ({ navigation }) => {
         }
       }
     } catch (e) {
-      console.log(e);
       setLoading(false);
       setIsOpenTop(true);
       setPermissionGranted(false);

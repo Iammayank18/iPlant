@@ -122,7 +122,6 @@ const MyProfile = ({ navigation }) => {
   const onRefresh = () => {
     dispatch(ProfileAction.fetchUserProfileData({ id: selectUser?.user?._id }));
   };
-  console.log(JSON.stringify(profileData.data));
 
   return (
     <SafeAreaView

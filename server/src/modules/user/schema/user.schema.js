@@ -131,9 +131,7 @@ userSchema.methods.generateAuthToken = async function () {
     this.tokens = token;
     await this.save();
     return token;
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) {}
 };
 
 const User = new mongoose.model("user", userSchema);

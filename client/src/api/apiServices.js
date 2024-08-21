@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "../utils/baseUrl";
 const baseURL = BASE_URL;
-console.log(baseURL);
+
 const axiosInstance = axios.create({
   baseURL,
   timeout: 60000,
@@ -17,9 +17,6 @@ export const setInterceptor = () => {
       return res;
     },
     (err) => {
-      console.log(err);
-      // return err;
-
       const error = err.response;
       let errorMsg =
         err.response && err.response.data && err.response.data.message;
@@ -36,7 +33,7 @@ export const setInterceptor = () => {
 
       // return Promise.reject(errorMsg || `Sorry, some system issue. Please try again and if issue still persists, please report to our team at publir`);
       return Promise.reject(err);
-    }
+    },
   );
 };
 

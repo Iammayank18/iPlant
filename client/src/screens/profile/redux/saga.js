@@ -25,20 +25,19 @@ const fetchUserProfileData = function* fetchUserProfileData(action) {
   }
 };
 const fetchUserUpdateProfilePhotoReq = function* fetchUserUpdateProfilePhotoReq(
-  action
+  action,
 ) {
   try {
     const payload = action.payload;
     const { data } = yield call(Apis.updateUserProfilePhotoApi, payload);
     yield put(ProfileAction.setUserUpdateProfilePhoto(data || []));
   } catch (err) {
-    console.log(err.response.statu);
     yield put(
       ProfileAction.setUserUpdateProfilePhoto({
         msg: err.response.data.msg,
         statusCode: err.response.status,
         status: err.response.data.status,
-      })
+      }),
     );
   }
 };
@@ -48,6 +47,6 @@ export default function* profileSaga() {
   yield takeLatest(ProfleTypes.FETCH_USER_PROFILE_DATA, fetchUserProfileData);
   yield takeLatest(
     ProfleTypes.FETCH_UPDATED_PROFILE_PHOTO,
-    fetchUserUpdateProfilePhotoReq
+    fetchUserUpdateProfilePhotoReq,
   );
 }

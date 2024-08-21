@@ -15,10 +15,9 @@ const login = function* login(action) {
       LoginActions.setUserData({
         user: data.data.data,
         jwtToken: data.data.token,
-      })
+      }),
     );
   } catch (error) {
-    console.log("error", error.response.data);
     return yield put(LoginActions.loginReqFailed(error));
   }
 };
@@ -29,7 +28,6 @@ const registerApiReq = function* registerApiReq(action) {
     const { data } = yield call(Apis.RegisterApi, payload);
     yield put(LoginActions.setRegisterUser(data));
   } catch (error) {
-    console.log("error", error.response.data);
     yield put(LoginActions.setRegisterUser(error.response.data));
   }
 };

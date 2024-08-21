@@ -103,8 +103,6 @@ const PostDetailsScreen = ({ route, navigation }) => {
     }, 1000);
   };
 
-  console.log(postByIdLoader, POST_DATA);
-
   if (postByIdLoader || !POST_DATA?.title) {
     return (
       <HStack
@@ -169,9 +167,7 @@ const PostDetailsScreen = ({ route, navigation }) => {
               source={{
                 uri: POST_DATA.feature_image,
               }}
-              onLoad={(e) => {
-                console.log("imahe is loading", e);
-              }}
+              onLoad={(e) => {}}
               alt='post image'
             />
           </AspectRatio>

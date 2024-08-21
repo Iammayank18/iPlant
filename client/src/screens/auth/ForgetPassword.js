@@ -1,18 +1,13 @@
 import {
   View,
   Text,
-  Button,
   TouchableOpacity,
   TextInput,
   Image,
   StyleSheet,
-  Pressable,
-  SafeAreaView,
   KeyboardAvoidingView,
 } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-
 import * as yup from "yup";
 import { Formik } from "formik";
 
@@ -21,10 +16,6 @@ import { ScrollView, Spinner, Stack } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import axios from "axios";
 import EmailIcon from "../../assets/iconEmail.png";
-import usePassIcon from "../../assets/user-pass.png";
-import usePassEye from "../../assets/eye-pass.png";
-import usePassEyeClose from "../../assets/eye-pass-close.png";
-import { ArrowBackIcon } from "native-base";
 import style from "./AuthStyle";
 import { BASE_URL } from "../../utils/baseUrl";
 import CommonInput from "../../components/common/Input/CommonInput";
@@ -46,7 +37,7 @@ let ForgettPassValidator = yup.object().shape({
     .required()
     .matches(
       /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-      "Password must contain at least aone uppercase, one number and one special case character"
+      "Password must contain at least aone uppercase, one number and one special case character",
     ),
   confirmPassword: yup
     .string()
@@ -54,7 +45,7 @@ let ForgettPassValidator = yup.object().shape({
     .required()
     .matches(
       /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-      "Password must contain at least aone uppercase, one number and one special case character"
+      "Password must contain at least aone uppercase, one number and one special case character",
     ),
 });
 
@@ -91,7 +82,7 @@ for forgett process end
   async function ReSendOtp() {
     const emailRegex = new RegExp(
       /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/,
-      "gm"
+      "gm",
     );
 
     if (emailRegex.test(email)) {
@@ -101,7 +92,7 @@ for forgett process end
         BASE_URL + "api/user/sendotp_forget_password",
         {
           email: email,
-        }
+        },
       );
       try {
         if (apiRes.data === "success") {
@@ -114,9 +105,7 @@ for forgett process end
           setOtpbtn(true);
           setOtpLoader(false);
         }
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     } else {
       alert("Please enter a valid email address");
     }
@@ -127,7 +116,7 @@ for forgett process end
       <>
         <Stack position={"absolute"} top={10} left={6}>
           <AntDesign
-            name="arrowleft"
+            name='arrowleft'
             color={"#323232"}
             size={30}
             onPress={() => navigation.goBack()}
@@ -140,8 +129,7 @@ for forgett process end
               fontFamily: "DMMedium",
               marginBottom: 30,
               color: "#000000",
-            }}
-          >
+            }}>
             Forgot password
           </Text>
         </Stack>
@@ -153,22 +141,20 @@ for forgett process end
               fontFamily: "DMRegular",
               marginBottom: 9,
               textAlign: "center",
-            }}
-          >
+            }}>
             Enter Email Address
           </Text>
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             keyboardVerticalOffset={90}
-            enabled={true}
-          >
+            enabled={true}>
             <Formik
               initialValues={{ email: "" }}
               onSubmit={async (values) => {
                 setEmail(values.email);
                 const emailRegex = new RegExp(
                   /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/,
-                  "gm"
+                  "gm",
                 );
 
                 if (emailRegex.test(values.email)) {
@@ -178,7 +164,7 @@ for forgett process end
                     BASE_URL + "api/user/sendotp_forget_password",
                     {
                       email: values.email,
-                    }
+                    },
                   );
 
                   try {
@@ -194,16 +180,13 @@ for forgett process end
                       setOtpbtn(true);
                       setOtpLoader(false);
                     }
-                  } catch (error) {
-                    console.log(error);
-                  }
+                  } catch (error) {}
                 } else {
                   alert("Please enter a valid email address");
                 }
               }}
               validationSchema={ForgettEmailValidator}
-              validateOnMount={true}
-            >
+              validateOnMount={true}>
               {({
                 handleChange,
                 handleBlur,
@@ -222,13 +205,13 @@ for forgett process end
                         width: 20,
                         height: 20,
                       }}
-                      resizeMode="contain"
+                      resizeMode='contain'
                     />
                     <TextInput
-                      placeholder="Email Address"
+                      placeholder='Email Address'
                       placeholderTextColor={"#CDCDCD"}
-                      autoCapitalize="none"
-                      textContentType="emailAddress"
+                      autoCapitalize='none'
+                      textContentType='emailAddress'
                       value={values.email}
                       // onChangeText={(text) => setEmail(text)}
                       onChangeText={handleChange("email")}
@@ -251,10 +234,9 @@ for forgett process end
                       marginTop: 20,
                       flexDirection: "row",
                     }}
-                    onPress={handleSubmit}
-                  >
+                    onPress={handleSubmit}>
                     <Stack direction={"row"} space={2}>
-                      {otpLoader && <Spinner color="indigo.500" />}
+                      {otpLoader && <Spinner color='indigo.500' />}
 
                       <Text style={style.buttonText}>Send otp</Text>
                     </Stack>
@@ -273,7 +255,7 @@ for forgett process end
       <>
         <Stack position={"absolute"} top={10} left={6}>
           <AntDesign
-            name="arrowleft"
+            name='arrowleft'
             color={"#323232"}
             size={30}
             onPress={() => navigation.goBack()}
@@ -287,8 +269,7 @@ for forgett process end
               fontFamily: "DMMedium",
               marginBottom: 30,
               color: "#000000",
-            }}
-          >
+            }}>
             Verification
           </Text>
         </Stack>
@@ -300,15 +281,13 @@ for forgett process end
               fontFamily: "DMRegular",
               marginBottom: 9,
               textAlign: "center",
-            }}
-          >
+            }}>
             Enter Verification Cade
           </Text>
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             keyboardVerticalOffset={90}
-            enabled={true}
-          >
+            enabled={true}>
             <Formik
               initialValues={{ otp: "" }}
               onSubmit={async (values) => {
@@ -318,7 +297,7 @@ for forgett process end
                   {
                     email: email,
                     otp: values.otp,
-                  }
+                  },
                 );
 
                 try {
@@ -336,13 +315,10 @@ for forgett process end
                     setPassDiv(true);
                     setOtpDiv(false);
                   }
-                } catch (error) {
-                  console.log(error);
-                }
+                } catch (error) {}
               }}
               validationSchema={ForgettOtpValidator}
-              validateOnMount={true}
-            >
+              validateOnMount={true}>
               {({
                 handleChange,
                 handleBlur,
@@ -356,9 +332,9 @@ for forgett process end
                 <>
                   <View style={style.textInput}>
                     <TextInput
-                      placeholder="OTP"
+                      placeholder='OTP'
                       placeholderTextColor={"#CDCDCD"}
-                      autoCapitalize="none"
+                      autoCapitalize='none'
                       onChangeText={handleChange("otp")}
                       onBlur={handleBlur("otp")}
                       value={values.otp}
@@ -375,15 +351,13 @@ for forgett process end
                       onPress={ReSendOtp}
                       style={{
                         marginBottom: 5,
-                      }}
-                    >
+                      }}>
                       <Stack
                         direction={"row"}
-                        alignItems="center"
-                        justifyContent="flex-end"
-                        space={2}
-                      >
-                        <MaterialIcons name="replay" size={19} color="black" />
+                        alignItems='center'
+                        justifyContent='flex-end'
+                        space={2}>
+                        <MaterialIcons name='replay' size={19} color='black' />
                         <Text>Resend otp</Text>
                       </Stack>
                     </TouchableOpacity>
@@ -401,10 +375,9 @@ for forgett process end
                       // marginTop: 20,
                       flexDirection: "row",
                     }}
-                    onPress={handleSubmit}
-                  >
+                    onPress={handleSubmit}>
                     <Stack direction={"row"} space={2}>
-                      {otpLoader && <Spinner color="indigo.500" />}
+                      {otpLoader && <Spinner color='indigo.500' />}
                       <Text style={style.buttonText}>Verify otp</Text>
                     </Stack>
                   </TouchableOpacity>
@@ -423,12 +396,7 @@ for forgett process end
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const handleSubmit = async () => {
-      // Handle form submission
-      console.log("Password:", password);
-      console.log("Confirm Password:", confirmPassword);
-      // ...
-    };
+    const handleSubmit = async () => {};
 
     const handlePasswordChange = (value) => {
       setPassword(value);
@@ -443,7 +411,7 @@ for forgett process end
         {/* ... */}
         <Stack position={"absolute"} top={10} left={6}>
           <AntDesign
-            name="arrowleft"
+            name='arrowleft'
             color={"#323232"}
             size={30}
             onPress={() => navigation.goBack()}
@@ -456,16 +424,14 @@ for forgett process end
               fontFamily: "DMMedium",
               marginBottom: 30,
               color: "#000000",
-            }}
-          >
+            }}>
             Reset Password
           </Text>
         </Stack>
         <Formik
           initialValues={{ password: "", confirmPassword: "" }}
           onSubmit={handleSubmit}
-          validationSchema={ForgettPassValidator}
-        >
+          validationSchema={ForgettPassValidator}>
           {({ handleChange, handleBlur, values, isValid, errors, touched }) => (
             <View>
               <View>
@@ -490,7 +456,7 @@ for forgett process end
                 <Stack marginTop={3}>
                   <CommonInput
                     inputLable={"Confirm Password"}
-                    placeholder="Confirm Password"
+                    placeholder='Confirm Password'
                     onChangeText={(value) => {
                       handleConfirmPasswordChange(value);
                       handleChange("confirmPassword")(value);
@@ -519,8 +485,7 @@ for forgett process end
                     flexDirection: "row",
                   }}
                   onPress={handleSubmit}
-                  disabled={!isValid || otpLoader}
-                >
+                  disabled={!isValid || otpLoader}>
                   {otpLoader && <Spinner mr={2} />}
 
                   <Text style={style.buttonText}>Submit</Text>
@@ -532,210 +497,6 @@ for forgett process end
       </>
     );
   };
-
-  // const EnterPasswordBox = () => {
-  //   return (
-  //     <>
-  // <Stack position={"absolute"} top={10} left={6}>
-  //   <AntDesign
-  //     name="arrowleft"
-  //     color={"#323232"}
-  //     size={30}
-  //     onPress={() => navigation.goBack()}
-  //   />
-  // </Stack>
-  // <Stack style={styles.logoContainer}>
-  //   <Text
-  //     style={{
-  //       fontSize: 28,
-  //       fontFamily: "DMMedium",
-  //       marginBottom: 30,
-  //       color: "#000000",
-  //     }}
-  //   >
-  //     Reset Password
-  //   </Text>
-  // </Stack>
-
-  //       <Stack marginTop={10}>
-  //         <KeyboardAvoidingView
-  //           behavior={Platform.OS === "ios" ? "padding" : "height"}
-  //           keyboardVerticalOffset={90}
-  //           enabled={true}
-  //         >
-  //           <Formik
-  //             initialValues={{ password: "", confirmPassword: "" }}
-  //             onSubmit={async (values) => {
-  //               console.log(values);
-  //               setOtpLoader(true);
-  //               const apiRes = await axios.post(
-  //                 BASE_URL + "api/user/reset_password",
-  //                 {
-  //                   email: email,
-  //                   password: values.password,
-  //                   confirmpassword: values.confirmPassword,
-  //                 }
-  //               );
-  //               console.log(apiRes);
-
-  //               try {
-  //                 if (apiRes.data.msg === "password updated successfully") {
-  //                   setOtpLoader(false);
-  //                   alert("Password updated successfully");
-  //                   setTimeout(() => {
-  //                     navigation.navigate("Login");
-  //                   }, 1200);
-  //                   // setVerifyOtpbtn(true);
-  //                 }
-  //               } catch (error) {
-  //                 console.log(error);
-  //               }
-  //             }}
-  //             validationSchema={ForgettPassValidator}
-  //             validateOnMount={true}
-  //             enableReinitialize={true}
-  //           >
-  //             {({
-  //               handleChange,
-  //               handleBlur,
-  //               handleSubmit,
-  //               values,
-  //               isValid,
-  //               errors,
-  //               touched,
-  //               isSubmitting,
-  //             }) => (
-  //               <View>
-  //                 <View>
-  //                   <Stack>
-  //                     <CommonInput
-  //                       inputLable={"Password"}
-  //                       placeholder={"Password"}
-  //                       onChangeText={handleChange("password")}
-  //                       onBlur={handleBlur("password")}
-  //                       value={values.password}
-  //                       placeholderColor={COLORS?.placeholderColor}
-  //                       secureTextEntry={showPass1}
-  //                       leftIcon={
-  //                         <Image
-  //                           source={usePassIcon}
-  //                           style={style.iconSize}
-  //                           resizeMode="stretch"
-  //                         />
-  //                       }
-  //                       rightIcon={
-  //                         values.password.length <= 0 ? null : (
-  //                           <TouchableOpacity
-  //                             onPress={() => {
-  //                               setShowPass1(!showPass1);
-  //                             }}
-  //                           >
-  //                             {!showPass1 ? (
-  //                               <Image
-  //                                 source={usePassEye}
-  //                                 style={{
-  //                                   width: 20,
-  //                                   height: 20,
-  //                                 }}
-  //                                 resizeMode="contain"
-  //                               />
-  //                             ) : (
-  //                               <Image
-  //                                 source={usePassEyeClose}
-  //                                 style={{
-  //                                   width: 20,
-  //                                   height: 20,
-  //                                 }}
-  //                                 resizeMode="contain"
-  //                               />
-  //                             )}
-  //                           </TouchableOpacity>
-  //                         )
-  //                       }
-  //                     />
-  //                   </Stack>
-  //                   {errors.password && touched.password && (
-  //                     <Text style={style.errors}>{errors.password}</Text>
-  //                   )}
-  //                   <Stack marginTop={3}>
-  //                     <CommonInput
-  //                       inputLable={"Confirm Password"}
-  //                       placeholder="Confirm Password"
-  //                       onChangeText={handleChange("confirmPassword")}
-  //                       onBlur={handleBlur("confirmPassword")}
-  //                       value={values.confirmPassword}
-  //                       placeholderColor={COLORS?.placeholderColor}
-  //                       secureTextEntry={showPass2}
-  //                       leftIcon={
-  //                         <Image
-  //                           source={usePassIcon}
-  //                           style={style.iconSize}
-  //                           resizeMode="stretch"
-  //                         />
-  //                       }
-  //                       rightIcon={
-  //                         values.confirmPassword.length <= 0 ? null : (
-  //                           <TouchableOpacity
-  //                             onPress={() => {
-  //                               setShowPass2(!showPass2);
-  //                             }}
-  //                           >
-  //                             {!showPass2 ? (
-  //                               <Image
-  //                                 source={usePassEye}
-  //                                 style={{
-  //                                   width: 20,
-  //                                   height: 20,
-  //                                 }}
-  //                                 resizeMode="contain"
-  //                               />
-  //                             ) : (
-  //                               <Image
-  //                                 source={usePassEyeClose}
-  //                                 style={{
-  //                                   width: 20,
-  //                                   height: 20,
-  //                                 }}
-  //                                 resizeMode="contain"
-  //                               />
-  //                             )}
-  //                           </TouchableOpacity>
-  //                         )
-  //                       }
-  //                     />
-  //                   </Stack>
-  //                   {errors.confirmPassword && touched.confirmPassword && (
-  //                     <Text style={style.errors}>{errors.confirmPassword}</Text>
-  //                   )}
-  //                 </View>
-  //                 <View style={{ paddingBottom: 30 }}>
-  //                   <TouchableOpacity
-  //                     style={{
-  //                       backgroundColor:
-  //                         !isValid || otpLoader ? "#d3d3d3" : "#0E2528",
-  //                       justifyContent: "center",
-  //                       alignItems: "center",
-  //                       minHeight: 48,
-  //                       borderRadius: 12,
-  //                       marginTop: 20,
-  //                       flexDirection: "row",
-  //                     }}
-  //                     onPress={handleSubmit}
-  //                     disabled={!isValid || otpLoader}
-  //                   >
-  //                     {otpLoader && <Spinner mr={2} />}
-
-  //                     <Text style={style.buttonText}>Submit</Text>
-  //                   </TouchableOpacity>
-  //                 </View>
-  //               </View>
-  //             )}
-  //           </Formik>
-  //         </KeyboardAvoidingView>
-  //       </Stack>
-  //     </>
-  //   );
-  // };
 
   return (
     <ScrollView style={style.container}>

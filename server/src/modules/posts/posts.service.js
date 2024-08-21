@@ -64,7 +64,6 @@ async function createPost(req, res) {
 
     // return COMMON_SERVICE.apiResponse(res, "photo updated successfully", true, 200, imageUrl);
   } catch (e) {
-    console.log(e);
     return COMMON_SERVICE.apiResponse(res, "something went wrong", false, 500);
   }
 }
@@ -116,8 +115,6 @@ async function calculateTravelDistance(origin, destination) {
 }
 
 async function getOnePostById(data) {
-  console.log("post by id", data);
-
   try {
     let distWithTime = {};
     const { location, lng, lat, user } = data;
@@ -195,7 +192,7 @@ async function getOnePostById(data) {
     const response = await PostLocationModel.aggregate(pipeline);
 
     const ns = response[0];
-    console.log("here====>", ns);
+
     const {
       location: { coordinates },
     } = ns;
@@ -229,7 +226,6 @@ async function getOnePostById(data) {
       data: newItem,
     };
   } catch (e) {
-    console.log(e);
     return {
       status: false,
       message: "something went wrong",
@@ -377,7 +373,6 @@ async function searchPost(query) {
       data: posts,
     };
   } catch (error) {
-    console.log(error);
     return {
       status: false,
       message: "something went wrong",
@@ -386,7 +381,6 @@ async function searchPost(query) {
 }
 
 async function GetPostForHomePage(query) {
-  console.log(query);
   try {
     const { city, latitude, longitude } = query;
     const filter = { featured: true };
@@ -552,7 +546,6 @@ async function getPostsByRouteQuery(query) {
       };
     }
 
-    // console.log(geoQuery);
     if (key === "toprated") {
       post = await PostLocationModel.aggregate([
         ...(city
@@ -787,8 +780,6 @@ async function getPostsByRouteQuery(query) {
               title: "$postdata.title",
               story: "$postdata.story",
               feature_image: "$postdata.feature_image",
-              title: "$postdata.title",
-              story: "$postdata.story",
               user: "$userData",
               city: "$postdata.city",
               area: "$postdata.area",
@@ -823,7 +814,7 @@ async function getPostsByRouteQuery(query) {
                 distance: Math.ceil(distWithTime.distance),
                 duration: Math.ceil(distWithTime.duration / 60),
               };
-              console.log(newItem);
+
               return newItem;
             }),
             1,
@@ -831,9 +822,7 @@ async function getPostsByRouteQuery(query) {
           newArrr = newArrr.concat(batchResults);
         }
         post = newArrr;
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
     }
 
     if (!post) {
@@ -848,7 +837,6 @@ async function getPostsByRouteQuery(query) {
       data: post,
     };
   } catch (e) {
-    console.log(e);
     return {
       status: false,
       message: "something went wrong",

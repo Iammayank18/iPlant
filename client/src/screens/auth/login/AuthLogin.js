@@ -1,14 +1,10 @@
 import {
   View,
   Text,
-  Button,
   TouchableOpacity,
-  TextInput,
   Image,
-  Pressable,
   KeyboardAvoidingView,
   ScrollView,
-  ActivityIndicator,
   Dimensions,
 } from "react-native";
 import React, { useEffect, useState } from "react";
@@ -26,7 +22,7 @@ import CommonButton from "../../../components/common/button/CommonButton";
 import { COLORS, FONT } from "../../../utils/theme";
 import style from "../AuthStyle";
 import { LoginActions } from "../redux/action";
-import LOGO from "../../../assets/vlogo2.png";
+
 let LoginSchema = yup.object().shape({
   email: yup
     .string()
@@ -58,13 +54,12 @@ const AuthLogin = ({ navigation }) => {
               color: COLORS.gray,
               fontSize: 45,
               fontFamily: FONT.PoppinsBold,
-            }}
-          >
+            }}>
             iPlant
           </Text>
           <Image
             source={require("../../../assets/leaf.png")}
-            alt="Alternate Text"
+            alt='Alternate Text'
             style={{
               width: 35,
               height: 35,
@@ -78,25 +73,22 @@ const AuthLogin = ({ navigation }) => {
             color: COLORS.verbGray,
             marginTop: 10,
             textAlign: "center",
-          }}
-        >
+          }}>
           Login to your accout.
         </Text>
       </Stack>
       <Stack>
         <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-        >
+          behavior={Platform.OS === "ios" ? "padding" : "height"}>
           <Formik
             initialValues={{ email: "", password: "" }}
             onSubmit={async (values) => {
               dispatch(
-                LoginActions.loginRequest({ ...values, authType: "email" })
+                LoginActions.loginRequest({ ...values, authType: "email" }),
               );
             }}
             validationSchema={LoginSchema}
-            validateOnMount={true}
-          >
+            validateOnMount={true}>
             {({
               handleChange,
               handleBlur,
@@ -112,7 +104,7 @@ const AuthLogin = ({ navigation }) => {
                   <Stack>
                     <CommonInput
                       inputLable={"Email Address"}
-                      placeholder="Email Address"
+                      placeholder='Email Address'
                       placeholderColor={COLORS?.placeholderColor}
                       style={{
                         fontFamily: "DMRegular",
@@ -121,7 +113,7 @@ const AuthLogin = ({ navigation }) => {
                         <Image
                           source={EmailIcon}
                           style={style.iconSize}
-                          resizeMode="stretch"
+                          resizeMode='stretch'
                         />
                       }
                       onChangeText={handleChange("email")}
@@ -138,12 +130,12 @@ const AuthLogin = ({ navigation }) => {
                       inputLable={"Password"}
                       placeholder={"Password"}
                       placeholderColor={COLORS?.placeholderColor}
-                      secureTextEntry={show}
+                      secureTextEntry={true}
                       leftIcon={
                         <Image
                           source={usePassIcon}
                           style={style.iconSize}
-                          resizeMode="stretch"
+                          resizeMode='stretch'
                         />
                       }
                       rightIcon={
@@ -151,8 +143,7 @@ const AuthLogin = ({ navigation }) => {
                           <TouchableOpacity
                             onPress={() => {
                               setShow(!show);
-                            }}
-                          >
+                            }}>
                             {!show ? (
                               <Image
                                 source={usePassEye}
@@ -160,7 +151,7 @@ const AuthLogin = ({ navigation }) => {
                                   width: 20,
                                   height: 20,
                                 }}
-                                resizeMode="contain"
+                                resizeMode='contain'
                               />
                             ) : (
                               <Image
@@ -169,7 +160,7 @@ const AuthLogin = ({ navigation }) => {
                                   width: 20,
                                   height: 20,
                                 }}
-                                resizeMode="contain"
+                                resizeMode='contain'
                               />
                             )}
                           </TouchableOpacity>
@@ -189,8 +180,7 @@ const AuthLogin = ({ navigation }) => {
                     style={{
                       flexDirection: "row",
                       justifyContent: "space-between",
-                    }}
-                  >
+                    }}>
                     {logres?.response?.msg ? (
                       <Text style={{ color: "red" }}>
                         {logres?.response?.msg}
@@ -201,11 +191,9 @@ const AuthLogin = ({ navigation }) => {
 
                     <TouchableOpacity
                       onPress={() => navigation.navigate("Forget")}
-                      style={{ marginBottom: 10 }}
-                    >
+                      style={{ marginBottom: 10 }}>
                       <Text
-                        style={{ color: "#1C3879", fontFamily: "DMRegular" }}
-                      >
+                        style={{ color: "#1C3879", fontFamily: "DMRegular" }}>
                         Forget Password
                       </Text>
                     </TouchableOpacity>
@@ -233,18 +221,15 @@ const AuthLogin = ({ navigation }) => {
                 <Center style={{ paddingBottom: 30 }}>
                   <TouchableOpacity
                     style={{ marginTop: 5 }}
-                    onPress={() => navigation.navigate("Register")}
-                  >
+                    onPress={() => navigation.navigate("Register")}>
                     <Text
                       style={{
                         fontFamily: "DMMedium",
                         color: "#BABABA",
-                      }}
-                    >
+                      }}>
                       Don't have an account?{" "}
                       <Text
-                        style={{ color: "#0E2528", fontFamily: "DMMedium" }}
-                      >
+                        style={{ color: "#0E2528", fontFamily: "DMMedium" }}>
                         Signup
                       </Text>
                     </Text>

@@ -22,7 +22,6 @@ export const MainScreenReducer = (state = [], action) => {
         qyerypagepost: [],
       };
     case MainScreenPostTypes.SET_ROUTE_QUERY_POST:
-      console.log("in setttttttt");
       return {
         ...state,
         qyerypagepostloader: false,
