@@ -89,31 +89,31 @@ async function registerUser(req, res) {
     const update = await new User(req.body);
     const letStore = update.save();
     if (letStore) {
-      const mailTransporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: "basantkumar2022@gmail.com",
-          pass: "cgyrrjiapzuoxjkw",
-        },
-      });
-      const mailDetails = {
-        from: "basantkumar2022@gmail.com",
-        to: req.body.email,
-        subject: "Welcom to iPlant",
-        text: `Welcome to iPlant ${req.body.name}!`,
-      };
+      // const mailTransporter = nodemailer.createTransport({
+      //   service: "gmail",
+      //   auth: {
+      //     user: "basantkumar2022@gmail.com",
+      //     pass: "cgyrrjiapzuoxjkw",
+      //   },
+      // });
+      // const mailDetails = {
+      //   from: "basantkumar2022@gmail.com",
+      //   to: req.body.email,
+      //   subject: "Welcom to iPlant",
+      //   text: `Welcome to iPlant ${req.body.name}!`,
+      // };
 
-      mailTransporter.sendMail(mailDetails, (err, data) => {
-        if (err) {
-          return COMMON_SERVICE.apiResponse(
-            res,
-            "failed to send mail",
-            false,
-            500,
-          );
-        }
-        return COMMON_SERVICE.apiResponse(res, "email send", true, 200, data);
-      });
+      // mailTransporter.sendMail(mailDetails, (err, data) => {
+      //   if (err) {
+      //     return COMMON_SERVICE.apiResponse(
+      //       res,
+      //       "failed to send mail",
+      //       false,
+      //       500,
+      //     );
+      //   }
+      //   return COMMON_SERVICE.apiResponse(res, "email send", true, 200, data);
+      // });
 
       return COMMON_SERVICE.apiResponse(res, "user registered", true, 201);
     }
@@ -665,8 +665,6 @@ async function getFavourites(req, res) {
           title: "$postdata.title",
           story: "$postdata.story",
           feature_image: "$postdata.feature_image",
-          title: "$postdata.title",
-          story: "$postdata.story",
           user: "$userData",
           city: "$postdata.city",
           area: "$postdata.area",

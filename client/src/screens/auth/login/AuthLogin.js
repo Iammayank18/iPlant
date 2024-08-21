@@ -130,7 +130,7 @@ const AuthLogin = ({ navigation }) => {
                       inputLable={"Password"}
                       placeholder={"Password"}
                       placeholderColor={COLORS?.placeholderColor}
-                      secureTextEntry={true}
+                      secureTextEntry={show}
                       leftIcon={
                         <Image
                           source={usePassIcon}

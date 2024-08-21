@@ -19,6 +19,7 @@ const CommonInput = ({
   inpurtStyle,
   defaultValue,
   disabled,
+  multiline = false,
 }) => {
   return (
     <>
@@ -26,7 +27,7 @@ const CommonInput = ({
       <View style={[style, InputStyle.textInput]}>
         {leftIcon}
         <TextInput
-          multiline
+          multiline={multiline}
           defaultValue={defaultValue}
           value={value}
           numberOfLines={numberOfLines}
