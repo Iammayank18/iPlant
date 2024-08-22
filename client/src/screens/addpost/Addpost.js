@@ -301,6 +301,7 @@ const Addpost = ({ navigation }) => {
                   borderColor: "red",
                   borderWidth: 1,
                 }}
+                multiline
               />
             </Stack>
             <Stack alignItems={"flex-end"}>
@@ -325,7 +326,7 @@ const Addpost = ({ navigation }) => {
         onPress={addpost}
         disabled={
           addpostLoader ||
-          feedBackData?.message?.split(" ").length > 50 ||
+          feedBackData?.message?.split(" ").length > 500 ||
           feedBackData?.subject?.length <= 0 ||
           feedBackData?.message?.length <= 0 ||
           !image
@@ -338,7 +339,7 @@ const Addpost = ({ navigation }) => {
           borderRadius: 10,
           backgroundColor:
             addpostLoader ||
-            feedBackData?.message?.split(" ").length > 50 ||
+            feedBackData?.message?.split(" ").length > 500 ||
             feedBackData?.subject?.length <= 0 ||
             feedBackData?.message?.length <= 0 ||
             !image

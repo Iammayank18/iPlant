@@ -9,14 +9,10 @@ import {
   Platform,
 } from "react-native";
 import React, { memo } from "react";
-import { VStack, Box, Divider, Image, Stack, HStack } from "native-base";
+import { Image, Stack, HStack } from "native-base";
 
 import AntDesign from "react-native-vector-icons/AntDesign";
-import {
-  Ionicons,
-  MaterialCommunityIcons,
-  MaterialIcons,
-} from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { COLORS, FONT, SIZES } from "../../utils/theme";
 const { width, height } = Dimensions.get("window");
 
@@ -52,7 +48,8 @@ const PostCard = ({
             borderColor={COLORS.verbBasePrimaryColor}>
             <Image
               source={{
-                uri: profile_pic,
+                uri:
+                  profile_pic || "https://wallpaperaccess.com/full/317501.jpg",
               }}
               style={{
                 width: 35,

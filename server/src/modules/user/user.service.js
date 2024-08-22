@@ -13,9 +13,6 @@ async function sendEmailOtp(req, res) {
   const emailverifyotp = COMMON_SERVICE.generateOtp(6);
 
   const user = await User.findOne({ email });
-  // if (!user) {
-  //     return COMMON_SERVICE.apiResponse(res, "user not found", false, 404);
-  // }
 
   if (user && user.verified === true) {
     return COMMON_SERVICE.apiResponse(res, "user already exist", false, 500);
